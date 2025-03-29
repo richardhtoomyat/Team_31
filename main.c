@@ -25,6 +25,7 @@ void saveHighScore(const char* filename, int score) {
 }
 
 int main() {
+    srand(time(NULL));
     Cell gameBoard[HEIGHT][WIDTH];
     Snake snake;
     int gameOver = 0;
@@ -66,6 +67,8 @@ int main() {
     } else {
         printf("Leaderboard: %d\n", highScore);
     }
+
+    void freeSnake(Snake* snake);
 
     return 0;
 }

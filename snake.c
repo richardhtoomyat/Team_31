@@ -138,4 +138,16 @@ int checkCollisions(Snake* snake) {
     }
 
     return 0;
+
+    void freeSnake(Snake* snake) {
+    SnakeSegment* current = snake->head;
+    while (current != NULL) {
+        SnakeSegment* next = current->next;
+        free(current);
+        current = next;
+    }
+    snake->head = NULL;
+    snake->length = 0;
+}
+
 }

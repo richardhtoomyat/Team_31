@@ -11,7 +11,7 @@ void changeTerminalSetting(void) {
     // Save original terminal settings
     tcgetattr(STDIN_FILENO, &orig_termios);
     
-    // Set terminal to raw mode
+    // Set terminal to raw mode // IMPORTANT
     struct termios raw = orig_termios;
     raw.c_lflag &= ~(ECHO | ICANON);
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
@@ -35,18 +35,18 @@ char getInput() {
             if (read(STDIN_FILENO, &buf[1], 1) == 1 && read(STDIN_FILENO, &buf[2], 1) == 1) {
                 if (buf[1] == '[') {
                     switch (buf[2]) {
-                        case 'A': return 'W';  // Up arrow
-                        case 'B': return 'S';  // Down arrow
-                        case 'C': return 'D';  // Right arrow
-                        case 'D': return 'A';  // Left arrow
+                        case 'A': return 'W';  // Up 
+                        case 'B': return 'S';  // Down 
+                        case 'C': return 'D';  // Right 
+                        case 'D': return 'A';  // Left
                     }
                 }
             }
         } else {
-            // Handle regular keys like 'q' to quit
+            // Handle keys like 'q' to quit
             return buf[0];
         }
     }
 
-    return 0;  // No input
+    return 0; 
 } 

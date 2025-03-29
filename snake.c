@@ -3,14 +3,12 @@
 #include "snake.h"
 
 void initializeSnake(Snake* snake) {
-    // Create initial head segment
+    // initial head segment
     snake->head = (SnakeSegment*)malloc(sizeof(SnakeSegment));
     if (snake->head == NULL) {
-        // Handle memory allocation failure
         exit(1);
     }
     
-    // Initialize snake in the center of the board
     snake->head->x = 15;
     snake->head->y = 7;
     snake->head->next = NULL;
@@ -19,11 +17,9 @@ void initializeSnake(Snake* snake) {
 }
 
 void moveSnake(Snake* snake, char input) {
-    // Store the current head position
     int prevX = snake->head->x;
     int prevY = snake->head->y;
     
-    // Update direction based on input
     if (input != 0) {
         switch (input) {
             case 'W':
@@ -67,7 +63,6 @@ void moveSnake(Snake* snake, char input) {
 }
 
 void addSegment(Snake* snake) {
-    // Create new segment
     SnakeSegment* newSegment = (SnakeSegment*)malloc(sizeof(SnakeSegment));
     if (newSegment == NULL) {
         return;
@@ -79,7 +74,6 @@ void addSegment(Snake* snake) {
         last = last->next;
     }
 
-    // Position new segment based on direction
     int newX = last->x;
     int newY = last->y;
 
@@ -97,7 +91,7 @@ void addSegment(Snake* snake) {
     snake->length++;
 }
 
-// ✅ Recursive helper for drawing snake
+//Recursion
 void updateBoardWithSnakeRecursive(Cell gameBoard[HEIGHT][WIDTH], SnakeSegment* segment) {
     if (segment == NULL) return;
     if (segment->y >= 0 && segment->y < HEIGHT &&
@@ -117,7 +111,6 @@ void updateBoardWithSnake(Cell gameBoard[HEIGHT][WIDTH], Snake* snake) {
         }
     }
 
-    // 🔁 Use recursion to draw snake
     updateBoardWithSnakeRecursive(gameBoard, snake->head);
 }
 
@@ -139,7 +132,9 @@ int checkCollisions(Snake* snake) {
 
     return 0;
 
-    void freeSnake(Snake* snake) {
+}
+
+void freeSnake(Snake* snake) {
     SnakeSegment* current = snake->head;
     while (current != NULL) {
         SnakeSegment* next = current->next;
@@ -148,6 +143,4 @@ int checkCollisions(Snake* snake) {
     }
     snake->head = NULL;
     snake->length = 0;
-}
-
 }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 #include "game_board.h"
 #include "snake.h"
 #include "movement.h"
@@ -69,6 +70,5 @@ int main() {
     }
 
     void freeSnake(Snake* snake);
-
     return 0;
 }

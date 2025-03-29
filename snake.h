@@ -9,19 +9,18 @@ typedef struct SnakeSegment {
     struct SnakeSegment* next;
 } SnakeSegment;
 
-// Snake structure with head pointer and direction
 typedef struct Snake {
     SnakeSegment* head;
     char direction;  // 'W', 'A', 'S', 'D'
     int length;     // Current length of snake
 } Snake;
 
-// Function declarations
 void initializeSnake(Snake* snake);
 void moveSnake(Snake* snake, char input);
 void addSegment(Snake* snake);
 void updateBoardWithSnake(Cell gameBoard[HEIGHT][WIDTH], Snake* snake);
 int checkCollisions(Snake* snake);
+void freeSnake(Snake* snake);
 
 
 #endif // SNAKE_H 

@@ -12,3 +12,8 @@ test:
 
 clean:
 	rm -f snake_game tests
+
+# make : compile
+# make test : to test
+# make run : to run the program
+# make clean : to clean

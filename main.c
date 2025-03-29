@@ -11,7 +11,7 @@ int loadHighScore(const char* filename) {
     FILE* file = fopen(filename, "r");
     int highScore = 0;
     if (file != NULL) {
-        fscanf(file, "%d", &highScore);
+        fscanf(file, "%d", &highScore); 
         fclose(file);
     }
     return highScore;
@@ -20,10 +20,18 @@ int loadHighScore(const char* filename) {
 void saveHighScore(const char* filename, int score) {
     FILE* file = fopen(filename, "w");
     if (file != NULL) {
-        fprintf(file, "%d", score);
+        time_t now = time(NULL);
+        struct tm* t = localtime(&now);
+
+        fprintf(file, "%d | %02d-%02d-%04d %02d:%02d:%02d\n",
+                score,
+                t->tm_mday, t->tm_mon + 1, t->tm_year + 1900,
+                t->tm_hour, t->tm_min, t->tm_sec);
+
         fclose(file);
     }
 }
+
 
 int main() {
     srand(time(NULL));

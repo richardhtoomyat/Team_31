@@ -23,7 +23,7 @@ void saveHighScore(const char* filename, int score) {
         time_t now = time(NULL);
         struct tm* t = localtime(&now);
 
-        fprintf(file, "%d | %02d-%02d-%04d %02d:%02d:%02d\n",
+        fprintf(file, "%d -> %02d-%02d-%04d %02d:%02d:%02d\n",
                 score,
                 t->tm_mday, t->tm_mon + 1, t->tm_year + 1900,
                 t->tm_hour, t->tm_min, t->tm_sec);
@@ -50,9 +50,14 @@ int main() {
         system("clear");
         printf("Score: %d  |  High Score: %d\n", score, highScore);
         printBoard(gameBoard);
-
+        char lastInput = 0; // keep track of last input
         char input = getInput();
-        moveSnake(&snake, input);
+        if (input != 0 && input != lastInput) {
+            moveSnake(&snake, input);
+            lastInput = input;
+        } else {
+            moveSnake(&snake, 0); // ignor if the same key is pressed again
+        }
 
         if (isFood(gameBoard, snake.head->x, snake.head->y)) {
             addSegment(&snake);
@@ -63,7 +68,7 @@ int main() {
 
         updateBoardWithSnake(gameBoard, &snake);
         gameOver = checkCollisions(&snake);
-        usleep(100000);
+        usleep(100000); // speed of the snake
     }
 
     restoreTerminalSetting();

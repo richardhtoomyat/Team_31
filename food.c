@@ -5,6 +5,8 @@
 #include "food.h"
 
 int isValidFoodPosition(Cell gameBoard[HEIGHT][WIDTH], Snake* snake, int x, int y) {
+    (void)gameBoard; // we do not need this!!!
+
     // Check if position is on border
     if (x <= 0 || x >= WIDTH-1 || y <= 0 || y >= HEIGHT-1) {
         return 0;

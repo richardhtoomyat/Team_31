@@ -10,6 +10,9 @@ test:
 	$(CC) $(CFLAGS) -o tests $(TEST_SRC)
 	./tests
 
+run: game
+	./snake_game
+
 clean:
 	rm -f snake_game tests
 

@@ -83,5 +83,6 @@ int main() {
     }
 
     void freeSnake(Snake* snake);
+    freeSnake(&snake);
     return 0;
 }

@@ -27,26 +27,26 @@ void restoreTerminalSetting(void) {
 }
 
 char getInput() {
-    char buf[3] = {0};
+    char buf[3] = {0}; 
 
+    // Helps to read a single input 
     if (read(STDIN_FILENO, &buf[0], 1) == 1) {
         if (buf[0] == '\x1b') {
-            // Possible escape sequence
-            if (read(STDIN_FILENO, &buf[1], 1) == 1 && read(STDIN_FILENO, &buf[2], 1) == 1) {
+            if (read(STDIN_FILENO, &buf[1], 1) == 1 &&
+                read(STDIN_FILENO, &buf[2], 1) == 1) {
+
                 if (buf[1] == '[') {
-                    switch (buf[2]) {
-                        case 'A': return 'W';  // Up 
-                        case 'B': return 'S';  // Down 
-                        case 'C': return 'D';  // Right 
-                        case 'D': return 'A';  // Left
-                    }
+                    if (buf[2] == 'A') return 'W'; // W works as up arrow
+                    else if (buf[2] == 'B') return 'S'; // S works as Down arrow
+                    else if (buf[2] == 'C') return 'D'; // D works as Right arrow
+                    else if (buf[2] == 'D') return 'A'; // A works as Left arrow
                 }
             }
-        } else {
-            // Handle keys like 'q' to quit
+        }
+        else {
             return buf[0];
         }
     }
+    return 0;
+}
 
-    return 0; 
-} 

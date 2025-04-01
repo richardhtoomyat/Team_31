@@ -12,4 +12,4 @@ void initializeBoard(Cell gameBoard[HEIGHT][WIDTH]);
 void printBoard(Cell gameBoard[HEIGHT][WIDTH]);
 void clearBoard(Cell gameBoard[HEIGHT][WIDTH]);
 
-#endif // GAME_BOARD_H 
+#endif 
